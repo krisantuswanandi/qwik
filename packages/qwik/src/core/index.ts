@@ -51,6 +51,7 @@ export {
   SSRStream,
   SSRComment,
   SkipRender,
+  type SSRStreamChildren,
 } from './render/jsx/utils.public';
 export type { SSRStreamProps, SSRHintProps } from './render/jsx/utils.public';
 export { Slot } from './render/jsx/slot.public';

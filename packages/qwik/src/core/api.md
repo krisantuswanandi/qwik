@@ -1202,8 +1202,11 @@ export const SSRStreamBlock: FunctionComponent<{
 }>;
 
 // @public (undocumented)
+export type SSRStreamChildren = AsyncGenerator<JSXChildren, void, any> | ((stream: StreamWriter) => Promise<void>) | (() => AsyncGenerator<JSXChildren, void, any>);
+
+// @public (undocumented)
 export type SSRStreamProps = {
-    children: AsyncGenerator<JSXChildren, void, any> | ((stream: StreamWriter) => Promise<void>) | (() => AsyncGenerator<JSXChildren, void, any>);
+    children: SSRStreamChildren;
 };
 
 // @public (undocumented)
