@@ -349,6 +349,18 @@ jobs:
         if: ${{ needs.changes.outputs.insightsbuild == 'true' }}
         uses: actions/download-artifact@v4.1.2
 
+      - name: Move Distribution Artifacts
+        if: ${{ needs.changes.outputs.insightsbuild == 'true' }}
+        run: |
+          mkdir -p packages/qwik/dist/
+          mv builderio-qwik-distribution/* packages/qwik/dist/
+          mkdir -p packages/qwik-city/lib/
+          mv builderio-qwikcity-distribution/* packages/qwik-city/lib/
+          mkdir -p packages/create-qwik/dist/
+          mv dist-dev-create-qwik/* packages/create-qwik/dist/
+          mkdir -p packages/eslint-plugin-qwik/dist/
+          mv dist-dev-eslint-plugin-qwik/* packages/eslint-plugin-qwik/dist/
+
       - name: Build Qwik Insights
         if: ${{ needs.changes.outputs.insightsbuild == 'true' }}
         run: pnpm run build.packages.insights
@@ -385,8 +397,20 @@ jobs:
           pnpm install --frozen-lockfile
 
       - name: Download Build Artifacts
-        if: ${{ needs.changes.outputs.insightsbuild == 'true' }}
+        if: ${{ needs.changes.outputs.docsbuild == 'true' }}
         uses: actions/download-artifact@v4.1.2
+
+      - name: Move Distribution Artifacts
+        if: ${{ needs.changes.outputs.docsbuild == 'true' }}
+        run: |
+          mkdir -p packages/qwik/dist/
+          mv builderio-qwik-distribution/* packages/qwik/dist/
+          mkdir -p packages/qwik-city/lib/
+          mv builderio-qwikcity-distribution/* packages/qwik-city/lib/
+          mkdir -p packages/create-qwik/dist/
+          mv dist-dev-create-qwik/* packages/create-qwik/dist/
+          mkdir -p packages/eslint-plugin-qwik/dist/
+          mv dist-dev-eslint-plugin-qwik/* packages/eslint-plugin-qwik/dist/
 
       - name: Build Qwik Docs
         if: ${{ needs.changes.outputs.docsbuild == 'true' }}
@@ -674,6 +698,17 @@ jobs:
 
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4.1.2
+
+      - name: Move Distribution Artifacts
+        run: |
+          mkdir -p packages/qwik/dist/
+          mv builderio-qwik-distribution/* packages/qwik/dist/
+          mkdir -p packages/qwik-city/lib/
+          mv builderio-qwikcity-distribution/* packages/qwik-city/lib/
+          mkdir -p packages/create-qwik/dist/
+          mv dist-dev-create-qwik/* packages/create-qwik/dist/
+          mkdir -p packages/eslint-plugin-qwik/dist/
+          mv dist-dev-eslint-plugin-qwik/* packages/eslint-plugin-qwik/dist/
 
       - name: Unit Tests
         run: pnpm run test.unit
